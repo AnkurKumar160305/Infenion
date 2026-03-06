@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 import json
 import os
 import re
@@ -14,7 +14,19 @@ if not os.path.exists(env_path):
 load_dotenv(dotenv_path=env_path)
 print(f"DEBUG: Loaded env from {env_path}")
 
+# Absolute path to public folder
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
+
 app = Flask(__name__)
+
+@app.route('/')
+def serve_index():
+    return send_from_directory(PUBLIC_DIR, 'index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory(PUBLIC_DIR, path)
 
 @app.errorhandler(Exception)
 def handle_exception(e):
