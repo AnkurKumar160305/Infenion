@@ -175,3 +175,8 @@ RESPOND IN EXACTLY THIS JSON FORMAT:
 # Required for Vercel
 # Vercel needs the Flask app instance to be the entry point.
 # It looks for an object named `app` in `api/index.py`.
+
+if __name__ == "__main__":
+    print("🚀 Starting Standalone Bug Hunter Server...")
+    print("🔗 Local URL: http://127.0.0.1:5000")
+    app.run(host="0.0.0.0", port=5000)
