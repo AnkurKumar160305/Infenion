@@ -15,18 +15,23 @@ load_dotenv(dotenv_path=env_path)
 print(f"DEBUG: Loaded env from {env_path}")
 
 # Absolute path to public folder
+# __file__ is api/index.py, so we go up two levels to reach the root
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PUBLIC_DIR = os.path.join(BASE_DIR, 'public')
 
-app = Flask(__name__)
+print(f"DEBUG: Standalone Server Paths:")
+print(f"  - BASE_DIR: {BASE_DIR}")
+print(f"  - PUBLIC_DIR: {PUBLIC_DIR}")
+if not os.path.exists(PUBLIC_DIR):
+    print(f"ERROR: PUBLIC_DIR DOES NOT EXIST!")
+elif not os.path.exists(os.path.join(PUBLIC_DIR, 'index.html')):
+    print(f"ERROR: index.html NOT FOUND IN {PUBLIC_DIR}")
+
+app = Flask(__name__, static_folder=PUBLIC_DIR, static_url_path='')
 
 @app.route('/')
 def serve_index():
-    return send_from_directory(PUBLIC_DIR, 'index.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory(PUBLIC_DIR, path)
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/favicon.ico')
 def favicon():
