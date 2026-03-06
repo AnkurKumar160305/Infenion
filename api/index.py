@@ -52,7 +52,7 @@ def handle_exception(e):
         "details": str(e)
     }), 500
 
-OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
+OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "").strip()
 OPENROUTER_MODEL = "google/gemini-2.0-flash-001"
 
 print(f"DEBUG: API Key starting with: {OPENROUTER_API_KEY[:10]}...")
