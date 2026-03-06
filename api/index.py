@@ -28,6 +28,10 @@ def serve_index():
 def serve_static(path):
     return send_from_directory(PUBLIC_DIR, path)
 
+@app.route('/favicon.ico')
+def favicon():
+    return '', 204
+
 @app.errorhandler(Exception)
 def handle_exception(e):
     # Pass through HTTP errors
@@ -45,6 +49,8 @@ def handle_exception(e):
 
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY", "")
 OPENROUTER_MODEL = "google/gemini-2.0-flash-001"
+
+print(f"DEBUG: API Key starting with: {OPENROUTER_API_KEY[:10]}...")
 
 def clean_text(text: str) -> str:
     if not text:
@@ -166,10 +172,14 @@ RESPOND IN EXACTLY THIS JSON FORMAT:
         })
 
     except Exception as e:
-        print(f"API Error: {str(e)}")
+        import traceback
+        error_msg = str(e)
+        print(f"CRITICAL API ERROR: {error_msg}")
+        traceback.print_exc()
         return jsonify({
             "error": "Failed to analyze code.",
-            "details": str(e)
+            "details": error_msg,
+            "type": type(e).__name__
         }), 500
 
 # Required for Vercel
