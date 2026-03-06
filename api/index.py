@@ -187,6 +187,6 @@ RESPOND IN EXACTLY THIS JSON FORMAT:
 # It looks for an object named `app` in `api/index.py`.
 
 if __name__ == "__main__":
-    print("🚀 Starting Standalone Bug Hunter Server...")
-    print("🔗 Local URL: http://127.0.0.1:5000")
+    print("Starting Standalone Bug Hunter Server...")
+    print("Local URL: http://127.0.0.1:5000")
     app.run(host="0.0.0.0", port=5000)
