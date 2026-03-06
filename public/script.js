@@ -50,7 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.error || 'Failed to analyze code');
+                const errorDetail = data.details ? ` (${data.details})` : '';
+                throw new Error((data.error || 'Failed to analyze code') + errorDetail);
             }
 
             // Display results
