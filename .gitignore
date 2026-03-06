@@ -1,0 +1,22 @@
+# Environments
+.env
+*.env
+code/config.env
+
+# Virtual Environment
+venv/
+code/venv/
+env/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDEs
+.vscode/
+.idea/
+
+.vercel
+.env*.local

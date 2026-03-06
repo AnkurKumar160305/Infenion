@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Bug Hunter - Infineon</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 2 1.88 1.88"/><path d="M14.12 3.88 16 2"/><path d="M9 7.13v-1a3.003 3.003 0 1 1 6 0v1"/><path d="M12 20c-3.3 0-6-2.7-6-6v-3a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v3c0 3.3-2.7 6-6 6"/><path d="M12 20v-9"/><path d="M6.53 9C4.6 8.8 3 7.1 3 5"/><path d="M6 13H2"/><path d="M3 21c0-2.1 1.7-3.9 3.8-4"/><path d="M20.97 5c-2.1.2-3.7 1.9-3.7 4"/><path d="M22 13h-4"/><path d="M17.2 17c2.1.1 3.8 1.9 3.8 4"/></svg>
+                </div>
+                <h1>Agentic Bug Hunter</h1>
+            </div>
+            <p class="subtitle">Powered by Gemini 2.0 Flash</p>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <div class="form-group">
+                    <label for="context">Context / Purpose</label>
+                    <input type="text" id="context" placeholder="e.g. Set specific DC test conditions for the device...">
+                </div>
+
+                <div class="form-group">
+                    <label for="hint">Hint (Optional)</label>
+                    <input type="text" id="hint" placeholder="e.g. Incorrect force range enum...">
+                </div>
+
+                <div class="form-group">
+                    <div class="code-header">
+                        <label for="code">C++ Code Snippet</label>
+                        <span class="language-badge">C++</span>
+                    </div>
+                    <textarea id="code" rows="10" placeholder="Paste your SmartRDI C++ code here..."></textarea>
+                </div>
+
+                <button id="analyze-btn" class="primary-btn">
+                    <span class="btn-text">Detect Bug</span>
+                    <div class="loader hidden"></div>
+                </button>
+            </div>
+
+            <div id="results-section" class="results-section hidden">
+                <h2>Analysis Results</h2>
+                
+                <div class="result-card">
+                    <div class="bug-line-container">
+                        <span class="label">Bug detected on Line:</span>
+                        <span id="bug-line-number" class="line-number"></span>
+                    </div>
+                    
+                    <div class="explanation-container">
+                        <h3>Explanation</h3>
+                        <p id="bug-explanation"></p>
+                    </div>
+
+                    <div class="code-preview" id="code-preview">
+                        <!-- Code lines will be injected here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div id="error-section" class="error-window hidden">
+                <div class="error-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </div>
+                <div class="error-message" id="error-message"></div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Infineon Hackathon &copy; 2026</p>
+        </footer>
+    </div>
+    
+    <script src="/script.js"></script>
+</body>
+</html>
