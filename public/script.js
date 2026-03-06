@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
 
             if (!response.ok) {
+                console.error('Server error data:', data);
                 const errorDetail = data.details ? ` (${data.details})` : '';
                 throw new Error((data.error || 'Failed to analyze code') + errorDetail);
             }
@@ -57,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Display results
             displayResults(data, code);
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Catch-all error:', error);
             showError(error.message || "An unexpected error occurred while communicating with the server.");
         } finally {
             setLoading(false);
